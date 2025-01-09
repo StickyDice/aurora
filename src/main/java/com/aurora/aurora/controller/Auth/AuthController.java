@@ -35,7 +35,7 @@ public class AuthController {
       return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(null);
     } catch (Exception e) {
       logger.error("An error occurred during login: {}", e.getMessage());
-      return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+      return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
     }
   }
 

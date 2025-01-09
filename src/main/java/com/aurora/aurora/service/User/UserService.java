@@ -24,9 +24,15 @@ public class UserService {
     return Optional.ofNullable(userRepository.findByPhoneNumber(phoneNumber));
   }
 
-  public Optional<UserModel> createUser(@NonNull RegisterRequest registerRequest) {
-    UserModel newUser = userRepository.createUser(registerRequest);
+  public UserModel createUser(@NonNull RegisterRequest registerRequest) {
+    UserModel newUser = new UserModel();
+    newUser.setEmail(registerRequest.getEmail());
+    newUser.setFullname(registerRequest.getFullname());
+    newUser.setPassword(registerRequest.getPassword());
+    newUser.setPhoneNumber(registerRequest.getPhoneNumber());
+    newUser.setRole(registerRequest.getRole());
 
-    return Optional.ofNullable(newUser);
+    return userRepository.save(newUser);
   }
+
 }

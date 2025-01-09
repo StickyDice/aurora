@@ -1,5 +1,7 @@
 package com.aurora.aurora.models.register;
 
+import com.aurora.aurora.models.user.UserRole;
+
 import lombok.Getter;
 import lombok.Setter;
 
@@ -17,4 +19,9 @@ public class RegisterRequest {
 
   /* -------------------------------------------------------------------------- */
   private String email;
+
+  /* -------------------------------------------------------------------------- */
+  private UserRole role;
+
+  /* -------------------------------------------------------------------------- */
 }
