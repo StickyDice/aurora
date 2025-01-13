@@ -12,7 +12,9 @@ import org.springframework.web.bind.annotation.RestController;
 import com.aurora.aurora.models.auth.AuthRequest;
 import com.aurora.aurora.models.auth.AuthResponse;
 import com.aurora.aurora.models.auth.RefreshJwtRequest;
+import com.aurora.aurora.models.register.RegisterRequest;
 import com.aurora.aurora.service.Auth.AuthService;
+import com.aurora.aurora.service.Register.RegisterService;
 
 import jakarta.security.auth.message.AuthException;
 import lombok.RequiredArgsConstructor;
@@ -21,9 +23,26 @@ import lombok.RequiredArgsConstructor;
 @RequestMapping("api/auth")
 @RequiredArgsConstructor
 public class AuthController {
+
+  private final RegisterService registerService;
+
   private final AuthService authService;
 
   private static final Logger logger = LoggerFactory.getLogger(AuthController.class);
+
+  @PostMapping("register")
+  public ResponseEntity<AuthResponse> register(@RequestBody RegisterRequest registerRequest) {
+    try {
+      final AuthResponse token = registerService.register(registerRequest);
+      return ResponseEntity.ok(token);
+    } catch (AuthException e) {
+      logger.error("Failed to create user: {}", e.getMessage());
+      return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(null);
+    } catch (Exception e) {
+      logger.error("Failed to create user: {}", e.getMessage());
+      return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
+    }
+  }
 
   @PostMapping("login")
   public ResponseEntity<AuthResponse> login(@RequestBody AuthRequest authRequest) {
