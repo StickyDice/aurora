@@ -4,10 +4,13 @@ import java.util.List;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.aurora.aurora.dto.property.CreatePropertyDto;
 import com.aurora.aurora.models.property.PropertyModel;
 import com.aurora.aurora.service.Property.PropertyService;
 
@@ -26,6 +29,10 @@ public class PropertyController {
       return ResponseEntity.ok(propertyService.getAllProperties());
 
     return ResponseEntity.ok(propertyService.getPaginatedProperties(skip, limit));
+  }
 
+  @PostMapping
+  public void createProperty(@RequestBody CreatePropertyDto property) {
+    propertyService.createProperty(property);
   }
 }
