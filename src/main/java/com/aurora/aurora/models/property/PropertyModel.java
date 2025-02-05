@@ -27,7 +27,7 @@ public class PropertyModel {
   private String[] images;
 
   /* -------------------------------------------------------------------------- */
-  
+
   private String address;
 
   /* -------------------------------------------------------------------------- */
@@ -46,5 +46,9 @@ public class PropertyModel {
   private String[] description_articles;
 
   /* -------------------------------------------------------------------------- */
+
+  private Float[] coordinates;
+
+  private PropertyConveniences conveniences;
 
 }

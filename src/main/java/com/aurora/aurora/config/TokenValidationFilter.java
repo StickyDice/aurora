@@ -27,6 +27,7 @@ public class TokenValidationFilter extends OncePerRequestFilter {
 
     String path = request.getRequestURI();
     boolean isRefreshRequest = path.startsWith("/api/auth/");
+    boolean isSwaggerRequest = path.contains("swagger") || path.contains("api-docs");
     String token = request.getHeader("Authorization");
 
     if (token != null && token.startsWith("Bearer ")) {
@@ -43,7 +44,7 @@ public class TokenValidationFilter extends OncePerRequestFilter {
         response.getWriter().write(e.getLocalizedMessage());
         return;
       }
-    } else if (!isRefreshRequest) {
+    } else if (!isRefreshRequest && !isSwaggerRequest) {
       response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
       response.getWriter().write("Invalid token 3");
       response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "UNAUTHORIZED");
