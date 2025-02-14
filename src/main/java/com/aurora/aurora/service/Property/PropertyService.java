@@ -24,6 +24,10 @@ public class PropertyService {
     return propertyRepository.findAll();
   }
 
+  public PropertyModel getPropertyById(int id) {
+    return propertyRepository.findById(id).orElse(null);
+  }
+
   public List<PropertyModel> getPaginatedProperties(int skip, int limit) {
     PageRequest pageable = PageRequest.of(skip, limit);
 
