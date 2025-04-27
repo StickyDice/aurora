@@ -1,5 +1,7 @@
 package com.example.aurora.Hotel.domain.model;
 
+import java.sql.Blob;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -20,7 +22,7 @@ public class Hotel {
 
   private String name;
 
-  private String[] images;
+  private Blob[] images;
 
   private String address;
 

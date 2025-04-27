@@ -6,8 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.aurora.Hotel.app.IUsecase.IHotelUsecase;
+import com.example.aurora.Hotel.data.repo.HotelRepo;
 import com.example.aurora.Hotel.domain.model.Hotel;
-import com.example.aurora.Hotel.repo.HotelRepo;
 
 @Service
 public class HotelUsecase implements IHotelUsecase {
