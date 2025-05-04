@@ -1,31 +1,26 @@
-package com.example.aurora.Client.domain.model;
+package com.example.aurora.features.user.domain.entity;
 
-import com.example.aurora.Rent.domain.model.Rent;
-
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToOne;
+import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Entity
 @Data
+@Entity
 @AllArgsConstructor
 @NoArgsConstructor
-public class Client {
+@Table(name = "client")
+public class User {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private int id;
+  private Integer id;
 
   private String fullname;
-
-  private String password;
 
   @Column(unique = true)
   private String phoneNumber;
@@ -33,7 +28,5 @@ public class Client {
   @Column(unique = true)
   private String email;
 
-  @OneToOne(cascade = CascadeType.ALL)
-  @JoinColumn(name = "rent_id")
-  private Rent rent;
+  private String password;
 }

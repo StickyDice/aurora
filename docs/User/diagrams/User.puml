@@ -1,0 +1,57 @@
+@startuml User diagram
+
+left to right direction
+
+package app {
+  package controller {
+    class UserRegisterController {
+      - UserRegisterServiceBoundary userRegisterService
+
+      + ResponseEntity<void> create(@RequestBody UserRegisterRequestModel requestModel)
+    }
+  }
+}
+
+package domain {
+  package entity {
+    class User {
+      UUID id
+      String fullname
+      String phoneNumber
+      String email
+      String[] Rent
+    }
+  }
+
+  package services {
+    interface UserRegisterServiceBoundary
+
+    class UserRegisterService implements UserRegisterServiceBoundary {
+      - UserRegisterRepo userRegisterRepo
+
+      + void create(UserRegisterRequestModel requestModel)
+    }
+  }
+
+  package requestModel {
+    class UserRegisterRequestModel {
+      String fullname
+      String phoneNumber
+      String email
+    }
+  }
+
+  UserRegisterService --> requestModel
+}
+
+package data {
+  package repo {
+    interface UserRegisterRepo implements CRUDRepository
+  }
+}
+
+UserRegisterService ..> UserRegisterRepo
+UserRegisterController ..> UserRegisterServiceBoundary
+UserRegisterController --> UserRegisterRequestModel
+
+@enduml
